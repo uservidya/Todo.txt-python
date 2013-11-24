@@ -12,4 +12,4 @@ install: echo
 script:  python run_tests.py
 notifications:
    on_success: change
-   on_failuer: always
+   on_failure: always
