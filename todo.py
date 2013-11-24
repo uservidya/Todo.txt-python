@@ -21,6 +21,7 @@
 import os
 import re
 import sys
+import textwrap
 from optparse import OptionParser
 from datetime import datetime, date
 from getpass import getuser
@@ -101,6 +102,7 @@ CONFIG = {
         "LEGACY": False,
         "ACTIONS": None,
         }
+_CONSOLE_WIDTH = 80 # the current config setup does not allow numbers, only text and 0 or 1
 
 
 for p in PRIORITIES:
@@ -785,7 +787,7 @@ def format_lines(color_only=False, include_done=False):
                 line = pri_re.sub("", line)
 
         i = str(i + 1).zfill(pad)
-        l = concat([color, invert, i, " ", line[:-1], default, "\n"])
+        l = concat([color, invert, textwrap.fill(i + " " + line[:-1], subsequent_indent='          ', width=_CONSOLE_WIDTH - 1), default, "\n"])
 
         if color_only:
             formatted.append(l)

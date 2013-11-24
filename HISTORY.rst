@@ -1,9 +1,9 @@
 History
 =======
 
-rewrite
+development
 -------
-
+- hanging indent on long todo items coutesy @minchinweb
 - Properly handle paths on windows with colons & backslashes courtesy @mstave 
   (commit message shows his name as unknown unfortunately: 
   3a8b7673cd85e8ec6d29c6832b5bcb2afdbb44c1)
