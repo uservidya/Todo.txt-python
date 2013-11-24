@@ -1,9 +1,9 @@
 todo.py
 =======
 
-.. image:: https://secure.travis-ci.org/sigmavirus24/Todo.txt-python.png?branch=rewrite
+.. image:: https://secure.travis-ci.org/MinchinWeb/Todo.txt-python.png?branch=development
     :alt: Build Status
-    :target: http://travis-ci.org/sigmavirus24/Todo.txt-python
+    :target: http://travis-ci.org/MinchinWeb/Todo.txt-python
 
 A port of the `popular todo.txt-cli project
 <https://github.com/ginatrapani/todo.txt-cli>`_ from bash to python.
@@ -76,7 +76,7 @@ Important Information
 - Build Status: TravisCI_
 
 .. _GPLv3: https://raw.github.com/sigmavirus24/Todo.txt-python/master/LICENSE
-.. _TravisCI: http://travis-ci.org/sigmavirus24/Todo.txt-python
+.. _TravisCI: http://travis-ci.org/MinchinWeb/Todo.txt-python
 
 --------
 
