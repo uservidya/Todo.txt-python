@@ -786,8 +786,7 @@ def format_lines(color_only=False, include_done=False):
             if no_priority:
                 line = pri_re.sub("", line)
 
-        i = str(i + 1).zfill(pad)
-        l = concat([color, invert, textwrap.fill(i + " " + line[:-1], subsequent_indent='          ', width=_CONSOLE_WIDTH - 1), default, "\n"])
+        l = concat([color, invert, textwrap.fill('{:>{mypad}}'.format(i+1,mypad=pad) + " " + line[:-1], subsequent_indent='          ', width=_CONSOLE_WIDTH - 1), default, "\n"])
 
         if color_only:
             formatted.append(l)
