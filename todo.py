@@ -26,7 +26,7 @@ from optparse import OptionParser
 from datetime import datetime, date
 from getpass import getuser
 
-VERSION = "development"
+VERSION = "WM-dev"
 REVISION = "$Id$"
 
 try:
@@ -51,9 +51,9 @@ except NameError:
 
 import string
 if hasattr(string, 'uppercase'):
-    PRIORITIES = string.uppercase[:24]
+    PRIORITIES = string.uppercase[:26]
 elif hasattr(string, 'ascii_uppercase'):
-    PRIORITIES = string.ascii_uppercase[:24]
+    PRIORITIES = string.ascii_uppercase[:26]
 
 if os.name == "nt":
     try:
