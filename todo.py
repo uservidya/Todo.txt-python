@@ -316,7 +316,7 @@ def get_config(config_name="", dir_name=""):
         default_config()
     else:
         strip_re = re.compile('\w+\s([A-Za-z_\\\\:$="./01]+).*')
-        pri_re = re.compile('(PRI_[A-X]|DEFAULT)')
+        pri_re = re.compile('(PRI_[A-Z]|DEFAULT)')
 
         for line in _iter_actual_lines_(config_file):
             # Extract VAR=VAL and then split VAR and VAL
@@ -529,7 +529,7 @@ def add_todo(args):
 
     prepend = CONFIG["PRE_DATE"]
     l = len([1 for l in iter_todos()]) + 1
-    pri_re = re.compile('(\([A-X]\))')
+    pri_re = re.compile('(\([A-Z]\))')
 
     if pri_re.match(line) and prepend:
         line = pri_re.sub(concat(["\g<1>",
@@ -582,7 +582,7 @@ def do_todo(line):
 
         today = datetime.now().strftime("%Y-%m-%d")
         removed = concat(["x", today,
-            re.sub("\([A-X]\)\s?", "", removed)], " ")
+            re.sub("\([A-Z]\)\s?", "", removed)], " ")
 
         files = [CONFIG["TODO_FILE"]]
         if CONFIG["DONE_FILE"]:
@@ -664,7 +664,7 @@ def append_todo(args):
 
 
 @command(True, 'pri', 'p')
-@usage('\tpri | p NUMBER [A-X]',
+@usage('\tpri | p NUMBER [A-Z]',
     '\t\tAdd priority specified (A, B, C, etc.) to item NUMBER.\n')
 def prioritize_todo(args):
     """Add or modify the priority of the specified item."""
@@ -677,7 +677,7 @@ def prioritize_todo(args):
             return
 
         new_pri = concat(["(", args[0], ") "])
-        r = re.match("(\([A-X]\)\s).*", old_line)
+        r = re.match("(\([A-Z]\)\s).*", old_line)
         if r:
             new_line = re.sub(re.escape(r.groups()[0]), new_pri, old_line)
         else:
@@ -686,7 +686,7 @@ def prioritize_todo(args):
         lines.insert(line_no - 1, new_line)
         rewrite_and_post(line_no, old_line, new_line, lines)
     else:
-        post_error('pri', 'NUMBER', 'capital letter in [A-X]')
+        post_error('pri', 'NUMBER', 'capital letter in [A-Z]')
 
 
 @command(True, 'depri', 'dp')
@@ -701,7 +701,7 @@ def de_prioritize_todo(number):
         if test_separated(old_line, lines, number):
             return
 
-        new_line = re.sub("(\([A-X]\)\s)", "", old_line)
+        new_line = re.sub("(\([A-Z]\)\s)", "", old_line)
         lines.insert(number - 1, new_line)
 
         rewrite_and_post(number, old_line, new_line, lines)
@@ -722,7 +722,7 @@ def prepend_todo(args):
         if test_separated(old_line, lines, line_no):
             return
 
-        pri_re = re.compile('^(\([A-X]\)\s)')
+        pri_re = re.compile('^(\([A-Z]\)\s)')
 
         if pri_re.match(old_line):
             new_line = pri_re.sub(concat(["\g<1>", prepend_str]), old_line)
@@ -804,7 +804,7 @@ def _legacy_sort(items):
     # (pri_b) Abc
     # (pri_c) Bcd
     etc., etc., etc."""
-    line_re = re.compile('^.*\d+\s(\([A-X]\)\s)?')
+    line_re = re.compile('^.*\d+\s(\([A-Z]\)\s)?')
     # The .* in the regexp is needed for the \033[* codes
     items = sorted([(line_re.sub("", i), i) for i in items])
     items = [line for (k, line) in items]

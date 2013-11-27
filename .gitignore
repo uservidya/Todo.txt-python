@@ -11,3 +11,4 @@ docs/_build/
 *.pyproj
 obj/
 *.sln
+*.suo

@@ -3,6 +3,7 @@ History
 
 development
 -------
+- priorities now run A-Z (were A-X)
 - hanging indent on long todo items courtesy @minchinweb
 - Properly handle paths on windows with colons & backslashes courtesy @mstave 
   (commit message shows his name as unknown unfortunately: 
@@ -27,8 +28,8 @@ development
 
 - Add sample_addons directory with Matt Stave's suggestions
 - PEP257 (Docstring) compliance
-- Help documentation automattically generated
-- Fix rare occurrence where script whips out todo.txt file
+- Help documentation automatically generated
+- Fix rare occurrence where script wipes out todo.txt file
 
 .. _todo.sh: https://github.com/ginatrapani/todo.txt-cli
 .. _add-ons:

@@ -41,7 +41,7 @@ class TestFormat(base.BaseTest):
                 color = todo.CONFIG["PRI_{0}".format(p)]
                 rd[p] = re.compile(concat([esc(colors[color]), 
                     "\d+ (?!\({0}\)).*".format(p), default]))
-                # If there is a priority listed ([A-X]), the match will fail on
+                # If there is a priority listed ([A-Z]), the match will fail on
                 # lines without priority
 
         rd["X"] = re.compile(concat([default, "\d+ .*", default]))
@@ -120,7 +120,7 @@ class TestFormat(base.BaseTest):
         self.assertIsInstance(lines, list)
 
         re_dict = self._generate_re_dictionary()
-        priority = re.compile(".*\(([A-X])\).*")
+        priority = re.compile(".*\(([A-Z])\).*")
 
         for line in lines:
             line = line.strip()
@@ -135,7 +135,7 @@ class TestFormat(base.BaseTest):
         # check that the return value is a dictionary
         #pass
         self.assertIsInstance(lines, cls)
-        reg = re.compile("\d+\s(\([A-X]\))?.*")
+        reg = re.compile("\d+\s(\([A-Z]\))?.*")
 
         if cls == list:
             for line in lines:

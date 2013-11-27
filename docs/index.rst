@@ -85,7 +85,7 @@ Usage
        log
           Shows the last five commits in your repository.
 
-       pri | p NUMBER [A-X]
+       pri | p NUMBER [A-Z]
           Add priority specified (A, B, C, etc.) to item NUMBER.
 
        prepend | pre NUMBER "text to prepend"

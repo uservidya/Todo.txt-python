@@ -34,22 +34,22 @@ class PrioritizeTest(base.BaseTest):
         for i in range(0, self.num):
             todo.prioritize_todo([str(i + 1), todo.PRIORITIES[i % n]])
 
-        self.assertNumLines(self.num, "\([A-X]\)\sTest\s\d+")
+        self.assertNumLines(self.num, "\([A-Z]\)\sTest\s\d+")
 
         for i in range(0, self.num):
             todo.prioritize_todo([str(i + 1), todo.PRIORITIES[-i % n]])
 
-        self.assertNumLines(self.num, "\([A-X]\)\sTest\s\d+")
+        self.assertNumLines(self.num, "\([A-Z]\)\sTest\s\d+")
 
         for i in range(0, self.num):
             todo.de_prioritize_todo(str(i + 1))
 
-        self.assertNumLines(0, "\([A-X]\)\sTest\s\d+")
+        self.assertNumLines(0, "\([A-Z]\)\sTest\s\d+")
 
         for i in range(0, self.num):
             todo.prioritize_todo([str(i + 1), todo.PRIORITIES[-i % n]])
 
-        self.assertNumLines(self.num, "\([A-X]\)\sTest\s\d+")
+        self.assertNumLines(self.num, "\([A-Z]\)\sTest\s\d+")
 
 if __name__ == "__main__":
     unittest.main()

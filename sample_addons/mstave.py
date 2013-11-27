@@ -17,7 +17,7 @@ def add_todo(args):
 
     prepend = CONFIG["PRE_DATE"]
     l = len([1 for l in iter_todos()]) + 1
-    pri_re = re.compile('(\([A-X]\))')
+    pri_re = re.compile('(\([A-Z]\))')
 
     if pri_re.match(line) and prepend:
         line = pri_re.sub(concat(["\g<1>",
