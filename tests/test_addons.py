@@ -1,5 +1,6 @@
 # TODO.TXT-CLI-python test script
 # Copyright (C) 2011-2012  Sigmavirus24
+# Copyright (C) 2013       William Minchin
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,6 +21,7 @@ import os
 import shutil
 import todo
 import base
+import sys
 
 
 class TestAddons(base.BaseTest):
@@ -65,6 +67,7 @@ class TestAddons(base.BaseTest):
         todo.commands = commands.copy()
         self.assertEqual(todo.execute_commands(args), 1)
 
+    @unittest.skipIf(sys.platform.startswith("win"), "sh not (typically) available on Windows")
     def test_sh_addons(self):
         lines = ['#!/bin/bash\n\n', 'A=$((1+1))']
         filename = todo.CONFIG['TODO_ACTIONS_DIR'] + '/addnums'
