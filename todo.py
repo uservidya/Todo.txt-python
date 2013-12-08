@@ -324,9 +324,13 @@ def get_config(config_name="", dir_name=""):
             var[1] = var[1].strip('"')
 
             if var[1] in ("True", "1"):
-                CONFIG[var[0]] ^= True
+                CONFIG[var[0]] = True
+				# was CONFIG[var[0]] ^= True
+				# the ^ operator is a bitwise XOR
+				# but I'm pretty sure we want assignment here instead
+				# (the 'False' line two down was similarly changed)
             elif var[1] in ("False", "0"):
-                CONFIG[var[0]] ^= False
+                CONFIG[var[0]] = False
             elif pri_re.match(var[0]):
                 CONFIG[var[0]] = var[1].strip('$').lower().replace('_', ' ')
             else:
