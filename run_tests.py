@@ -35,4 +35,6 @@ if __name__ == "__main__":
         suite = unittest.defaultTestLoader.loadTestsFromNames(names)
 
     print("=== Starting unittest suite ===")
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    if not result.wasSuccessful():
+        sys.exit(1)

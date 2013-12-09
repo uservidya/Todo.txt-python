@@ -1,4 +1,4 @@
-﻿language: python
+language: python
 python:
   - 2.6
   - 2.7
@@ -9,8 +9,7 @@ python:
 #install: pip install gitpython
 install: echo
 # # command to run tests, e.g. python setup.py test
-#script:  python run_tests.py
-script: nosetests
+script:  python run_tests.py
 notifications:
    on_success: change
    on_failure: always
