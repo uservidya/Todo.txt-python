@@ -31,7 +31,7 @@ todotxt = todo.CONFIG["TODO_FILE"] = "test_todo.txt"
 donetxt = todo.CONFIG["DONE_FILE"] = "test_done.txt"
 
 class BaseTest(unittest.TestCase):
-    num = 50
+    num = 52
 
     def default_config(self):
         pass
@@ -93,13 +93,13 @@ class BaseTest(unittest.TestCase):
 
 
     def _test_lines_context(self, num):
-        projects = ["@foo", "@bar", "@bogus", "@github", "@school", "@work",
+        contexts = ["@foo", "@bar", "@bogus", "@github", "@school", "@work",
                 "@inthemorning", "@agenda", "@noagenda"]
-        n = len(projects)
+        n = len(contexts)
         l = self._test_lines_pri(num)
         m = []
         for i in range(0, num):
-            m.append(todo.concat([l[i], projects[i % n]], " "))
+            m.append(todo.concat([l[i], contexts[i % n]], " "))
         return m
 
 
