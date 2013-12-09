@@ -35,16 +35,16 @@ class TestFormat(base.BaseTest):
             for p in todo.PRIORITIES[:-1]:
                 color = todo.CONFIG["PRI_{0}".format(p)]
                 rd[p] = re.compile(concat([esc(colors[color]), 
-                    "\d+ (\({0}\)) .*".format(p), default]))
+                    " *\d+ (\({0}\)) .*".format(p), default]))
         else:
             for p in todo.PRIORITIES[:-1]:
                 color = todo.CONFIG["PRI_{0}".format(p)]
                 rd[p] = re.compile(concat([esc(colors[color]), 
-                    "\d+ (?!\({0}\)).*".format(p), default]))
+                    " *\d+ (?!\({0}\)).*".format(p), default]))
                 # If there is a priority listed ([A-Z]), the match will fail on
                 # lines without priority
 
-        rd["X"] = re.compile(concat([default, "\d+ .*", default]))
+        rd["X"] = re.compile(concat([default, " *\d+ .*", default]))
         return rd
 
 
@@ -125,7 +125,7 @@ class TestFormat(base.BaseTest):
         for line in lines:
             line = line.strip()
             p = priority.sub("\g<1>", line)
-            self.assertIsNotNone(re_dict[p].match(line), todo.concat([p, line], 
+            self.assertIsNotNone(re_dict[p].match(line), todo.concat([p, line],
                 " "))
 
 
