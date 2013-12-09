@@ -22,6 +22,7 @@ import shutil
 import todo
 import base
 import sys
+import unittest
 
 
 class TestAddons(base.BaseTest):
