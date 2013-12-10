@@ -325,10 +325,10 @@ def get_config(config_name="", dir_name=""):
 
             if var[1] in ("True", "1"):
                 CONFIG[var[0]] = True
-				# was CONFIG[var[0]] ^= True
-				# the ^ operator is a bitwise XOR
-				# but I'm pretty sure we want assignment here instead
-				# (the 'False' line two down was similarly changed)
+                # was CONFIG[var[0]] ^= True
+                # the ^ operator is a bitwise XOR
+                # but I'm pretty sure we want assignment here instead
+                # (the 'False' line two down was similarly changed)
             elif var[1] in ("False", "0"):
                 CONFIG[var[0]] = False
             elif pri_re.match(var[0]):
@@ -908,7 +908,7 @@ def list_todo(args=None, plain=False, no_priority=False):
         _list_by_(*args)
 
 
-@usage('listall', 'lsa')
+@command(False, 'listall', 'lsa')
 @usage('\tlistall | lsa',
     '\t\tLists all items in your todo.txt file sorted by priority followed',
     '\t\tby the items in your done.txt file.\n')
@@ -924,7 +924,7 @@ def list_all():
     print_x_of_y(lines, lines)
 
 
-@command(False, 'listdate', 'sd')
+@command(False, 'listdate', 'lsd')
 @usage('\tlistdate | lsd',
     '\t\tLists all items in your todo.txt file sorted by date.\n')
 def list_date():
@@ -939,7 +939,7 @@ def list_date():
     '\t\tLists all items in your todo.txt file sorted by project title.\n')
 def list_project():
     """Organizes items by project +prj they belong to."""
-    lines, sorted = _list_("project", "\+(\w+)")
+    lines, sorted = _list_("project", "\+([\w\-'_]+)")
     print(concat(sorted)[:-1])
     print_x_of_y(sorted, lines)
 
@@ -949,7 +949,7 @@ def list_project():
     '\t\tLists all items in your todo.txt file sorted by context.\n')
 def list_context():
     """Organizes items by context @context associated with them."""
-    lines, sorted = _list_("context", "@(\w+)")
+    lines, sorted = _list_("context", "@([\w\-'_]+)")
     print(concat(sorted)[:-1])
     print_x_of_y(sorted, lines)
 ### End LP Functions
