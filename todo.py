@@ -51,9 +51,9 @@ except NameError:
 
 import string
 if hasattr(string, 'uppercase'):
-    PRIORITIES = string.uppercase[:26]
+    PRIORITIES = string.uppercase
 elif hasattr(string, 'ascii_uppercase'):
-    PRIORITIES = string.ascii_uppercase[:26]
+    PRIORITIES = string.ascii_uppercase
 
 if os.name == "nt":
     try:
@@ -767,7 +767,7 @@ def format_lines(color_only=False, include_done=False):
     default = CONFIG.get("DEFAULT", "default")
     default = TERM_COLORS[default] if not plain else ""
     invert = TERM_COLORS["reverse"] if CONFIG["INVERT"] else ""
-    pri_re = re.compile('^\(([A-W])\)\s')
+    pri_re = re.compile('^\(([A-Y])\)\s')
     category = ""
     pad = todo_padding(include_done)
     colors = set(TERM_COLORS.keys())  # Supposedly sets are faster for look-ups
@@ -777,7 +777,7 @@ def format_lines(color_only=False, include_done=False):
         formatted = dict(zip(PRIORITIES, [[] for i in PRIORITIES]))
 
     for (i, line) in enumerate(iter_todos(include_done)):
-        category = "X"
+        category = "Z"
         color = default
 
         r = pri_re.match(line)

@@ -44,7 +44,7 @@ class TestFormat(base.BaseTest):
                 # If there is a priority listed ([A-Z]), the match will fail on
                 # lines without priority
 
-        rd["X"] = re.compile(concat([default, " *\d+ .*", default]))
+        rd["Z"] = re.compile(concat([default, " *\d+ .*", default]))
         return rd
 
 
@@ -135,7 +135,7 @@ class TestFormat(base.BaseTest):
         # check that the return value is a dictionary
         #pass
         self.assertIsInstance(lines, cls)
-        reg = re.compile("\d+\s(\([A-Z]\))?.*")
+        reg = re.compile(" *\d+\s(\([A-Z]\))?.*")
 
         if cls == list:
             for line in lines:
