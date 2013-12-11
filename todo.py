@@ -27,7 +27,7 @@ from datetime import datetime, date
 from getpass import getuser
 
 VERSION = "WM-dev"
-REVISION = "$Id$"
+REVISION = "$Id: f8b6060e77caa47cbe86cf10d3ada9f26c999136 $"
 
 try:
     import readline
@@ -518,7 +518,7 @@ def default_config():
 
 ### New todo Functions
 @command(True, 'add', 'a')
-@usage('\tadd | a "Item to do +project @context #{yyyy-mm-dd}"',
+@usage('\tadd | a',
        concat(["\t\tAdds 'Item to do +project @context #{yyyy-mm-dd}'",
        "to your todo.txt"], ' '), "\t\tfile.",
        "\t\t+project, @context, #{yyyy-mm-dd} are optional\n")
@@ -533,7 +533,7 @@ def add_todo(args):
 
     prepend = CONFIG["PRE_DATE"]
     l = len([1 for l in iter_todos()]) + 1
-    pri_re = re.compile('(\([A-Z]\))')
+    pri_re = re.compile('(\([A-Z]\)) ?')
 
     if pri_re.match(line) and prepend:
         line = pri_re.sub(concat(["\g<1>",
