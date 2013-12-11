@@ -10,6 +10,4 @@ python:
 install: echo
 # # command to run tests, e.g. python setup.py test
 script:  python run_tests.py
-notifications:
-   on_success: change
-   on_failuer: always
+
