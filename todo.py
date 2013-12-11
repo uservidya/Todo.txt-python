@@ -27,7 +27,7 @@ from datetime import datetime, date
 from getpass import getuser
 
 VERSION = "WM-dev"
-REVISION = "$Id$"
+REVISION = "$Id: f8b6060e77caa47cbe86cf10d3ada9f26c999136 $"
 
 try:
     import readline
@@ -928,8 +928,8 @@ def list_all():
 @usage('\tlistdate | lsd',
     '\t\tLists all items in your todo.txt file sorted by date.\n')
 def list_date():
-    """List todo items by date #{yyyy-mm-dd}."""
-    lines, sorted = _list_("date", "#\{(\d{4})-(\d{1,2})-(\d{1,2})\}")
+    """List todo items by date yyyy-m-d."""
+    lines, sorted = _list_("date", "(\d{4})-(\d{1,2})-(\d{1,2})")
     print(concat(sorted)[:-1])
     print_x_of_y(sorted, lines)
 
@@ -938,7 +938,7 @@ def list_date():
 @usage('\tlistproj | lsp',
     '\t\tLists all items in your todo.txt file sorted by project title.\n')
 def list_project():
-    """Organizes items by project +prj they belong to."""
+    """Organizes items by the project +prj they belong to."""
     lines, sorted = _list_("project", "\+([\w\-'_]+)")
     print(concat(sorted)[:-1])
     print_x_of_y(sorted, lines)
@@ -948,7 +948,7 @@ def list_project():
 @usage('\tlistcon | lsc',
     '\t\tLists all items in your todo.txt file sorted by context.\n')
 def list_context():
-    """Organizes items by context @context associated with them."""
+    """Organizes items by the context @context associated with them."""
     lines, sorted = _list_("context", "@([\w\-'_]+)")
     print(concat(sorted)[:-1])
     print_x_of_y(sorted, lines)
