@@ -27,7 +27,7 @@ from datetime import datetime, date
 from getpass import getuser
 
 VERSION = "WM-dev"
-REVISION = "$Id: f8b6060e77caa47cbe86cf10d3ada9f26c999136 $"
+REVISION = "$Id$"
 
 try:
     import readline
@@ -103,6 +103,7 @@ CONFIG = {
         "ACTIONS": None,
         }
 _CONSOLE_WIDTH = 80 # the current config setup does not allow numbers, only text and 0 or 1
+_TOP_LINES = 16 # as above
 
 
 for p in PRIORITIES:
@@ -518,7 +519,7 @@ def default_config():
 
 ### New todo Functions
 @command(True, 'add', 'a')
-@usage('\tadd | a',
+@usage('\tadd | a "Item to do +project @context #{yyyy-mm-dd}"',
        concat(["\t\tAdds 'Item to do +project @context #{yyyy-mm-dd}'",
        "to your todo.txt"], ' '), "\t\tfile.",
        "\t\t+project, @context, #{yyyy-mm-dd} are optional\n")
@@ -553,7 +554,7 @@ def add_todo(args):
 @command(True, 'addm')
 @usage('\taddm "First item to do +project @context #{yyyy-mm-dd}',
     '\t\tSecond item to do +project @context #{yyyy-mm-dd}',
-    '\t\t...', '\t\tLast item to do +project @context #{yyyy-mm-dd}',
+    '\t\t...', '\t\tLast item to do +project @context #{yyyy-mm-dd}"',
     '\t\tAdds each line as a separate item to your todo.txt file.\n')
 def addm_todo(args):
     """Add new items to the list of things todo."""
@@ -958,6 +959,16 @@ def list_context():
     lines, sorted = _list_("context", "@([\w\-'_]+)")
     print(concat(sorted)[:-1])
     print_x_of_y(sorted, lines)
+
+@command(False, 'top')
+@usage('\ttop',
+       '\t\tLists the top ' + str(_TOP_LINES) + ' items in your todo.txt file when sorted by priority.\n')
+def list_top():
+    """Lists the top items from the 'listpri' command. The number of items is
+    determined by the variable _TOP_LINES"""
+    lines, sorted = _list_("pri", "")
+    print(concat(sorted[:_TOP_LINES])[:-1])
+    print_x_of_y(sorted[:_TOP_LINES], sorted)
 ### End LP Functions
 
 
