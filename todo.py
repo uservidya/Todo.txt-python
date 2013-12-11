@@ -27,7 +27,7 @@ from datetime import datetime, date
 from getpass import getuser
 
 VERSION = "WM-dev"
-REVISION = "$Id: f8b6060e77caa47cbe86cf10d3ada9f26c999136 $"
+REVISION = "$Id$"
 
 try:
     import readline
@@ -790,7 +790,7 @@ def format_lines(color_only=False, include_done=False):
             if no_priority:
                 line = pri_re.sub("", line)
 
-        l = concat([color, invert, textwrap.fill('{:>{mypad}}'.format(i+1,mypad=pad) + " " + line[:-1], subsequent_indent='          ', width=_CONSOLE_WIDTH - 1), default, "\n"])
+        l = concat([color, invert, '{:>{mypad}}'.format(i+1,mypad=pad) + " " + line[:-1], default, "\n"])
 
         if color_only:
             formatted.append(l)
@@ -828,7 +828,7 @@ def _list_(by, regexp):
         for line in lines:
             match = regexp.findall(line)
             if match:
-                line = concat(["\t", line])
+                line = textwrap.fill(line[:], initial_indent=' '*4, subsequent_indent=' '*14, width=_CONSOLE_WIDTH - 1) + '\n'
                 for i in match:
                     if by == "date":
                         i = date(int(i[0]), int(i[1]), int(i[2]))
@@ -838,10 +838,16 @@ def _list_(by, regexp):
                     else:
                         todo[i].append(line)
             else:
+                line = textwrap.fill(line[:], subsequent_indent=' '*10, width=_CONSOLE_WIDTH - 1) + '\n'
                 todo[nonetype].append(line)
     elif by == "pri":
         lines = format_lines()
-        todo.update(lines)
+        newlines = dict(zip(PRIORITIES, [[] for i in PRIORITIES]))
+        for priority in lines:
+            for line in lines[priority]:
+                l = textwrap.fill(line[:], subsequent_indent=' '*10, width=_CONSOLE_WIDTH - 1) + '\n'
+                newlines[priority].append(l)
+        todo.update(newlines)
         by_list = list(PRIORITIES)
 
     by_list.sort()
